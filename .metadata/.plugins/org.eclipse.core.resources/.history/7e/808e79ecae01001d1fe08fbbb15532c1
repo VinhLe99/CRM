@@ -1,0 +1,92 @@
+package com.cybersoft.crm.controllers;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.cybersoft.crm.models.Project;
+import com.cybersoft.crm.models.User;
+import com.cybersoft.crm.services.ProjectService;
+
+@WebServlet(name = "Group", urlPatterns = {"/project-table","/project-add","/project-detail","/project-delete","/project-update"})
+public class ProjectController extends HttpServlet{
+
+	private ProjectService projectService = new ProjectService();
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		resp.setContentType("text/html;charset=UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		
+		String path = req.getServletPath();
+		switch (path) {
+		case "/logout":
+			req.getSession().invalidate();
+			resp.sendRedirect(req.getContextPath()	+ "/login");
+			break;
+		case "/project-table":
+			List<Project> list = projectService.getListProjects();
+			req.setAttribute("list", list);
+			req.getRequestDispatcher("project-table.jsp").forward(req, resp);
+			break;
+		case "/project-delete":
+			break;
+		case "/project-add":
+			req.getRequestDispatcher("project-add.jsp").forward(req, resp);
+			break;
+		case "/project-detail":
+			req.getRequestDispatcher("project-detail.jsp").forward(req, resp);
+			break;
+		default:
+			break;
+		}
+		
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		req.setCharacterEncoding("UTF-8");
+		String path = req.getServletPath();
+		System.out.println(req.getParameter("start_date"));
+		switch (path) {
+		case "/project-add":	
+			Project new_project = new Project();			
+			new_project.setName(req.getParameter("name"));
+			new_project.setDescription(req.getParameter("description"));
+			try {
+				new_project.setStart_date(SimpleDateFormat("dd/MM/yyyy").parse(req.getParameter("start_date")));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			try {
+				new_project.setEnd_date(SimpleDateFormat("dd/MM/yyyy").parse(req.getParameter("end_date")));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			new_project.setOwner(Integer.parseInt(req.getParameter("end_date")));			
+			if(projectService.addProject(new_project) != false ) {
+				resp.sendRedirect(req.getContextPath()	+ "/project-table");
+			}else {
+				resp.sendRedirect(req.getContextPath()	+ "/project-add");
+				System.out.println("Không thêm được");
+			}			
+			break;
+		
+		default:
+			break;
+		}
+	}
+	private DateFormat SimpleDateFormat(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

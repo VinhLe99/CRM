@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/cybersoft/crm/connection/DBConnection.java=UTF-8
+encoding//src/main/java/com/cybersoft/crm/controllers/LoginController.java=UTF-8
+encoding//src/main/java/com/cybersoft/crm/controllers/UserController.java=UTF-8
+encoding//src/main/java/com/cybersoft/crm/services/UserService.java=UTF-8
+encoding//src/main/webapp/dashboard.jsp=UTF-8
+encoding//src/main/webapp/project-add.jsp=UTF-8
+encoding//src/main/webapp/project-table.jsp=UTF-8
+encoding//src/main/webapp/task-table.jsp=UTF-8
+encoding//src/main/webapp/user-add.jsp=UTF-8
+encoding//src/main/webapp/user-detail.jsp=UTF-8
+encoding/<project>=UTF-8

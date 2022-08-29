@@ -1,0 +1,20 @@
+1657537384136	Rename type 'GroupTaskController'
+1657537742912	Rename type 'GroupTask'
+1657541482373	Delete element
+1657542562196	Rename resource 'groupwork.jsp'
+1657593428887	Rename resource 'groupwork-details.html'
+1657593486950	Rename resource 'groupwork-add.html'
+1657603574587	Rename resource 'groupwork-table.jsp'
+1657603757187	Rename type 'GroupWorkController'
+1657603788134	Rename type 'GroupService'
+1657604565921	Rename type 'GroupWork'
+1657606496169	Rename resource 'groupwork-details.jsp'
+1657606503138	Rename resource 'groupwork-add.jsp'
+1657606613886	Rename resource 'project-details.jsp'
+1657706042750	Delete element
+1657783284423	Rename resource 'task.html'
+1657783786115	Delete element
+1657788383778	Rename resource 'task.jsp'
+1658046816735	Rename resource 'task-add.html'
+1658046963628	Delete element
+1658059712660	Rename resource 'groupwork-details.html'

@@ -1,0 +1,81 @@
+package com.cybersoft.crm.controllers;
+
+import java.io.IOException;
+import java.sql.Date;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.cybersoft.crm.models.Project;
+import com.cybersoft.crm.models.StatusTask;
+import com.cybersoft.crm.models.Task;
+import com.cybersoft.crm.services.TaskService;
+
+@WebServlet(name = "Task", urlPatterns = {"/task-table","/task-add","/task-delete"})
+public class TaskController extends HttpServlet{
+
+	private TaskService taskService = new TaskService();
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		resp.setContentType("text/html;charset=UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		
+		String path = req.getServletPath();
+		switch (path) {
+		case "/logout":
+			req.getSession().invalidate();
+			resp.sendRedirect(req.getContextPath()	+ "/login");
+			break;
+		case "/task-table":
+			int idxem = Integer.parseInt(req.getParameter("xem"));
+			List<Task> list = taskService.getListTask(idxem);
+			req.setAttribute("list", list);
+			req.getRequestDispatcher("task-table.jsp").forward(req, resp);
+			break;
+		case "/logout":
+			req.getSession().invalidate();
+			resp.sendRedirect(req.getContextPath()	+ "/login");
+			break;
+		default:
+			break;
+		}
+	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		req.setCharacterEncoding("UTF-8");
+		String path = req.getServletPath();
+		switch (path) {
+		case "/task-add":	
+						
+			if() != false ) {
+				resp.sendRedirect(req.getContextPath()	+ "/project-table");
+			}else {
+				resp.sendRedirect(req.getContextPath()	+ "/project-add");
+				System.out.println("Không thêm được" + Date.valueOf(path));
+			}			
+			break;
+		case "/project-update":	
+			Project project_update = new Project();	
+			project_update.setId(Integer.parseInt(req.getParameter("id")));
+			project_update.setName(req.getParameter("name"));
+			project_update.setDescription(req.getParameter("description"));
+			project_update.setStart_date(Date.valueOf(req.getParameter("start_date")));
+			project_update.setEnd_date(Date.valueOf(req.getParameter("end_date")));
+			if(projectService.updateProject(project_update) != false ) {
+				resp.sendRedirect(req.getContextPath()	+ "/project-table");
+			}else {
+				resp.sendRedirect(req.getContextPath()	+ "/project-table");
+				System.out.println("Không sửa được");
+			}									
+			break;
+		default:
+			break;
+		}
+	}
+}
